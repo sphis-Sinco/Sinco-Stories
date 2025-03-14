@@ -1,5 +1,6 @@
 package;
 
+import flixel.FlxG;
 import flixel.FlxState;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.input.keyboard.FlxKey;
@@ -9,12 +10,16 @@ import sinlib.utilities.TryCatch;
 class MenuState extends FlxState
 {
 	var selections:Map<String, Dynamic> = [
-		"War of the seven worlds" => () -> new MenuState(),
+		"War of the seven worlds" => () ->
+		{
+			trace('Going to the story');
+			FlxG.switchState(() -> new MenuState());
+		},
 		#if sys "Leave" => () -> Sys.exit(0) #end
 	];
 	var selectionText:FlxTypedGroup<FlxText> = new FlxTypedGroup<FlxText>();
 	var selected:Int = 0;
-	var ranCreate:Bool = false;
+	public static var ranCreate:Bool = false;
 
 	override public function create()
 	{
@@ -27,6 +32,7 @@ class MenuState extends FlxState
 
 	var up_keys:Array<FlxKey> = [UP, W];
 	var down_keys:Array<FlxKey> = [DOWN, S];
+	var selection_keys:Array<FlxKey> = [ENTER];
 
 	var max_selection:Int = 0;
 
@@ -51,6 +57,11 @@ class MenuState extends FlxState
 				selected = max_selection;
 			}
 			updateSelectionText();
+		}
+
+		if (ControlManagement.anyJustReleased(selection_keys))
+		{
+			selections.get(selectionText.members[selected].text)();
 		}
 
 		super.update(elapsed);
