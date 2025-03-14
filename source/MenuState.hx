@@ -9,11 +9,11 @@ import sinlib.utilities.TryCatch;
 
 class MenuState extends FlxState
 {
-	var selections:Map<String, Dynamic> = [
+	public var selections:Map<String, Dynamic> = [
 		"War of the seven worlds" => () ->
 		{
 			trace('Going to the story');
-			FlxG.switchState(() -> new MenuState());
+			FlxG.switchState(() -> new TaleSelectState(WAR_OF_THE_SEVEN_WORLDS));
 		},
 		#if sys "Leave" => () -> Sys.exit(0) #end
 	];

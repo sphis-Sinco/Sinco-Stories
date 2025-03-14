@@ -221,6 +221,6 @@ class FileManager
  */
 enum abstract PathTypes(String) from String to String
 {
-	public var DEFAULT:String = "default";
-	public var WAR_OF_THE_SEVEN_WORLDS:String = "war_of_the_seven_worlds";
+	public var DEFAULT:String = "default/";
+	public var WAR_OF_THE_SEVEN_WORLDS:String = "war_of_the_seven_worlds/";
 }
