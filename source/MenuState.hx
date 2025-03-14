@@ -11,6 +11,11 @@ class MenuState extends FlxState
 
 	override public function create()
 	{
+		for (text in selections.keys())
+		{
+			trace(text);
+		}
+
 		super.create();
 	}
 
