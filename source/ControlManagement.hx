@@ -5,6 +5,11 @@ import flixel.input.keyboard.FlxKey;
 
 class ControlManagement
 {
+	// variables
+	public static final up_keys:Array<FlxKey> = [UP, W];
+	public static final down_keys:Array<FlxKey> = [DOWN, S];
+	public static final selection_keys:Array<FlxKey> = [ENTER];
+	public static final leave_keys:Array<FlxKey> = [ESCAPE];
 
         // Singular
         public static function pressed(Key:FlxKey):Bool

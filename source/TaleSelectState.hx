@@ -12,6 +12,11 @@ class TaleSelectState extends MenuState
 
 		selections = [];
 
+		selections.set("Back", () ->
+		{
+			FlxG.switchState(() -> new MenuState());
+		});
+
                 var index:Int = 0;
                 var talefolder:Array<String> = FileManager.readDirectory(FileManager.getDataFile('stories/', ourtale));
                 talefolder.remove('data-goes-here.txt');
@@ -21,17 +26,14 @@ class TaleSelectState extends MenuState
                         var talename:String = tale.split('.')[0];
                         trace(talename);
 
-                        selections.set(talename, () ->
-                        {
-                                FlxG.switchState(() -> new MenuState());
-                        });
+			selections.set('$talename', () -> switchToStoryState(ourtale, tale));
 
                         index++;
-                }
+		}
+	}
 
-		selections.set("Back", () ->
-		{
-			FlxG.switchState(() -> new MenuState());
-		});
+	function switchToStoryState(ourtale:PathTypes = DEFAULT, story:String = 'tale1'):Void
+	{
+		FlxG.switchState(() -> new StoryState(ourtale, story));
 	}
 }

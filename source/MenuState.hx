@@ -30,15 +30,11 @@ class MenuState extends FlxState
 		ranCreate = true;
 	}
 
-	var up_keys:Array<FlxKey> = [UP, W];
-	var down_keys:Array<FlxKey> = [DOWN, S];
-	var selection_keys:Array<FlxKey> = [ENTER];
-
 	var max_selection:Int = 0;
 
 	override public function update(elapsed:Float)
 	{
-		if (ControlManagement.anyJustReleased(up_keys))
+		if (ControlManagement.anyJustReleased(ControlManagement.up_keys))
 		{
 			selected--;
 			if (selected < 0)
@@ -48,7 +44,7 @@ class MenuState extends FlxState
 			}
 			updateSelectionText();
 		}
-		else if (ControlManagement.anyJustReleased(down_keys))
+		else if (ControlManagement.anyJustReleased(ControlManagement.down_keys))
 		{
 			selected++;
 			if (selected > max_selection)
@@ -59,7 +55,7 @@ class MenuState extends FlxState
 			updateSelectionText();
 		}
 
-		if (ControlManagement.anyJustReleased(selection_keys))
+		if (ControlManagement.anyJustReleased(ControlManagement.selection_keys))
 		{
 			selections.get(selectionText.members[selected].text)();
 		}
@@ -67,7 +63,7 @@ class MenuState extends FlxState
 		super.update(elapsed);
 	}
 
-	function updateSelectionText()
+	function updateSelectionText():Void
 	{
 		TryCatch.tryCatch(() ->
 		{
